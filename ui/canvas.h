@@ -43,7 +43,7 @@ namespace ui {
         void resetFlags(QSize size);
         void refreshDisplayImage();
         bool maskAsSelected(QPoint p, QPoint reference) const;
-        void find4Directions(QPoint p, QPoint reference);
+        void findFrom();
         int pointToIndex(QPoint p);
 
         void mousePressEvent(QMouseEvent* event);

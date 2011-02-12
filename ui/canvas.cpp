@@ -92,7 +92,7 @@ void Canvas::refreshDisplayImage()
         return;
     }
     displayImage = coreImage.copy(0, 0, coreImage.width(), coreImage.height());
-    find4Directions(lastSelectPoint, lastSelectPoint);
+    findFrom();
     for (int y = 0; y < coreImage.height(); ++y)
     {
         for (int x = 0; x < coreImage.width(); ++x)
@@ -104,28 +104,34 @@ void Canvas::refreshDisplayImage()
             }
         }
     }
-    update();
+    emit Painted();
 }
 
-void Canvas::find4Directions(QPoint p, QPoint reference)
+void Canvas::findFrom()
 {
-    if (p.x() < 0 || p.y() < 0 || p.x() >= coreImage.width() || p.y() >= coreImage.height())
+    QList<QPair<QPoint, QPoint> > searchQueue;
+    searchQueue.push_back(qMakePair(lastSelectPoint, lastSelectPoint));
+    for (int i = 0; i < searchQueue.size(); ++i)
     {
-        return;
+        QPoint p = searchQueue[i].first;
+        if (p.x() < 0 || p.y() < 0 || p.x() >= coreImage.width() || p.y() >= coreImage.height())
+        {
+            continue;
+        }
+        if (selectedPointFlags[pointToIndex(p)])
+        {
+            continue;
+        }
+        if (!(selectedPointFlags[pointToIndex(p)] = maskAsSelected(p, searchQueue[i].second)))
+        {
+            continue;
+        }
+        selectedPoints.push_back(p);
+        searchQueue.push_back(qMakePair(p + QPoint(-1, 0), p));
+        searchQueue.push_back(qMakePair(p + QPoint(1, 0), p));
+        searchQueue.push_back(qMakePair(p + QPoint(0, 1), p));
+        searchQueue.push_back(qMakePair(p + QPoint(0, -1), p));
     }
-    if (selectedPointFlags[pointToIndex(p)])
-    {
-        return;
-    }
-    if (!(selectedPointFlags[pointToIndex(p)] = maskAsSelected(p, reference)))
-    {
-        return;
-    }
-    selectedPoints.push_back(p);
-    find4Directions(p + QPoint(-1, 0), p);
-    find4Directions(p + QPoint(1, 0), p);
-    find4Directions(p + QPoint(0, 1), p);
-    find4Directions(p + QPoint(0, -1), p);
 }
 
 bool Canvas::maskAsSelected(QPoint p, QPoint reference) const
