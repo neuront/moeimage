@@ -16,6 +16,8 @@ MainWindow::MainWindow()
     , swap_rg(new QPushButton(tr("Swap R&&G"), this))
     , selectionReseter(new QPushButton(tr("&Reset Selection"), this))
     , modifySaver(new QPushButton(tr("Save &Modify"), this))
+    , toleranceHint(new QLabel(tr("Color Tolerance"), this))
+    , toleranceEditor(new QLineEdit("256", this))
 {
     MainLayoutWrapper(this)
         .Begin<VertLayout>()
@@ -31,6 +33,10 @@ MainWindow::MainWindow()
                 .End()
                 .Begin<VertLayout>()
                     (selectionReseter)
+                    .Begin<HoriLayout>()
+                        (toleranceHint)
+                        (toleranceEditor)
+                    .End()
                     (modifySaver)
                 .End()
             .End()
@@ -48,6 +54,8 @@ MainWindow::MainWindow()
     connect(selectionReseter, SIGNAL(clicked()), canvas, SLOT(resetDisplay()));
     connect(modifySaver, SIGNAL(clicked()), canvas, SLOT(saveModify()));
 
+    connect(toleranceEditor, SIGNAL(textChanged(QString const&)), this, SLOT(toleranceChange(QString const&)));
+
     connect(canvas, SIGNAL(Painted()), this, SLOT(repaint()));
 }
 
@@ -64,5 +72,15 @@ void MainWindow::trySaveImage()
     if (imageSaver->saveFile(this, imageOpener->getFileName()))
     {
         canvas->saveImage(imageSaver->getFileName());
+    }
+}
+
+void MainWindow::toleranceChange(QString const& tolerance)
+{
+    bool ok;
+    int newValue = tolerance.toInt(&ok);
+    if (ok)
+    {
+        canvas->setColorTolerance(newValue);
     }
 }

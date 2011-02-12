@@ -5,6 +5,8 @@
 #include <QTimer>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QLineEdit>
+#include <QLabel>
 #include "canvas.h"
 #include "imageopen.h"
 #include "imagesave.h"
@@ -30,9 +32,13 @@ namespace ui {
 
         QPushButton* selectionReseter;
         QPushButton* modifySaver;
+        QLabel* toleranceHint;
+        QLineEdit* toleranceEditor;
     private slots:
         void tryOpenImage();
         void trySaveImage();
+
+        void toleranceChange(QString const& tolerance);
     };
 
 }
