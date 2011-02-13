@@ -11,7 +11,14 @@ ImageOpenTrigger::ImageOpenTrigger(QObject* parent)
 
 bool ImageOpenTrigger::openFile(QWidget* parent)
 {
-    fileName = QFileDialog::getOpenFileName(parent, tr("Open Image"), lastPath);
+    fileName = QFileDialog::getOpenFileName(parent, tr("Open Image"), lastPath, tr("PNG Image (*.png);;"
+                                                                                   "JPEG Image (*.jpg *.jpeg);;"
+                                                                                   "Bitmap (*.bmp);;"
+                                                                                   "All files (*.*)"));
+    if (!fileName.isNull())
+    {
+        lastPath = fileName;
+    }
     return !fileName.isNull();
 }
 

@@ -59,6 +59,8 @@ MainWindow::MainWindow()
     connect(canvas, SIGNAL(painted()), this, SLOT(refreshUi()));
 
     setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+
+    setWindowTitle(tr("Moe Image"));
 }
 
 void MainWindow::tryOpenImage()
