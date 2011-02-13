@@ -159,7 +159,7 @@ void Canvas::mousePressEvent(QMouseEvent* event)
 }
 
 template <typename _PixelMaker>
-void Canvas::SwapColor(_PixelMaker pm)
+void Canvas::swapColor(_PixelMaker pm)
 {
     for (int i = 0; i < selectedPoints.size(); ++i)
     {
@@ -191,20 +191,20 @@ struct RGSwp
     }
 };
 
-void Canvas::SwapRB()
+void Canvas::swapRB()
 {
-    SwapColor(RBSwp());
+    swapColor(RBSwp());
     emit Painted();
 }
 
-void Canvas::SwapGB()
+void Canvas::swapGB()
 {
-    SwapColor(GBSwp());
+    swapColor(GBSwp());
     emit Painted();
 }
 
-void Canvas::SwapRG()
+void Canvas::swapRG()
 {
-    SwapColor(RGSwp());
+    swapColor(RGSwp());
     emit Painted();
 }

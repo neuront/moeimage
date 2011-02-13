@@ -25,10 +25,12 @@ namespace ui {
 
         QPushButton* openImage;
         QPushButton* saveImage;
+
         Canvas* canvas;
-        QPushButton* swap_rb;
-        QPushButton* swap_gb;
-        QPushButton* swap_rg;
+
+        QPushButton* rbSwapper;
+        QPushButton* gbSwapper;
+        QPushButton* rgSwapper;
 
         QPushButton* selectionReseter;
         QPushButton* modifySaver;

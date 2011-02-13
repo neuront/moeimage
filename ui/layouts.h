@@ -15,14 +15,14 @@ namespace ui {
         typedef LayoutBase<_FinalType, _ParentType> ThisType;
 
         template <template <typename> class _SubLayoutTemplate>
-        _SubLayoutTemplate<_FinalType> Begin()
+        _SubLayoutTemplate<_FinalType> begin()
         {
-            _SubLayoutTemplate<_FinalType> sub(Final());
-            Final().layout->addItem(sub.layout);
+            _SubLayoutTemplate<_FinalType> sub(final());
+            final().layout->addItem(sub.layout);
             return sub;
         }
 
-        _ParentType& End()
+        _ParentType& end()
         {
             return parent;
         }
@@ -33,12 +33,12 @@ namespace ui {
             : parent(p)
         {}
     private:
-        _FinalType& Final()
+        _FinalType& final()
         {
             return *static_cast<_FinalType*>(this);
         }
 
-        _FinalType const& Final() const
+        _FinalType const& final() const
         {
             return *static_cast<_FinalType const*>(this);
         }
@@ -126,14 +126,14 @@ namespace ui {
         }
 
         template <template <typename> class _SubLayoutTemplate>
-        _SubLayoutTemplate<MainLayoutWrapper> Begin()
+        _SubLayoutTemplate<MainLayoutWrapper> begin()
         {
             _SubLayoutTemplate<MainLayoutWrapper> sub(*this);
             layout->addItem(sub.layout);
             return sub;
         }
 
-        QWidget* End() const
+        QWidget* end() const
         {
             return widget;
         }

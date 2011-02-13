@@ -11,45 +11,45 @@ MainWindow::MainWindow()
     , openImage(new QPushButton(tr("&Open Image"), this))
     , saveImage(new QPushButton(tr("&Save Image"), this))
     , canvas(new Canvas(this))
-    , swap_rb(new QPushButton(tr("Swap R&&B"), this))
-    , swap_gb(new QPushButton(tr("Swap G&&B"), this))
-    , swap_rg(new QPushButton(tr("Swap R&&G"), this))
+    , rbSwapper(new QPushButton(tr("Swap R&&B"), this))
+    , gbSwapper(new QPushButton(tr("Swap G&&B"), this))
+    , rgSwapper(new QPushButton(tr("Swap R&&G"), this))
     , selectionReseter(new QPushButton(tr("&Reset Selection"), this))
     , modifySaver(new QPushButton(tr("Save &Modify"), this))
     , toleranceHint(new QLabel(tr("Color Tolerance"), this))
     , toleranceEditor(new QLineEdit("256", this))
 {
     MainLayoutWrapper(this)
-        .Begin<VertLayout>()
-            .Begin<HoriLayout>()
-                .Begin<VertLayout>()
+        .begin<VertLayout>()
+            .begin<HoriLayout>()
+                .begin<VertLayout>()
                     (openImage)
                     (saveImage)
-                .End()
-                .Begin<VertLayout>()
-                    (swap_rb)
-                    (swap_gb)
-                    (swap_rg)
-                .End()
-                .Begin<VertLayout>()
+                .end()
+                .begin<VertLayout>()
+                    (rbSwapper)
+                    (gbSwapper)
+                    (rgSwapper)
+                .end()
+                .begin<VertLayout>()
                     (selectionReseter)
-                    .Begin<HoriLayout>()
+                    .begin<HoriLayout>()
                         (toleranceHint)
                         (toleranceEditor)
-                    .End()
+                    .end()
                     (modifySaver)
-                .End()
-            .End()
+                .end()
+            .end()
             (canvas)
-        .End()
-    .End();
+        .end()
+    .end();
 
     connect(openImage, SIGNAL(clicked()), this, SLOT(tryOpenImage()));
     connect(saveImage, SIGNAL(clicked()), this, SLOT(trySaveImage()));
 
-    connect(swap_rb, SIGNAL(clicked()), canvas, SLOT(SwapRB()));
-    connect(swap_gb, SIGNAL(clicked()), canvas, SLOT(SwapGB()));
-    connect(swap_rg, SIGNAL(clicked()), canvas, SLOT(SwapRG()));
+    connect(rbSwapper, SIGNAL(clicked()), canvas, SLOT(swapRB()));
+    connect(gbSwapper, SIGNAL(clicked()), canvas, SLOT(swapGB()));
+    connect(rgSwapper, SIGNAL(clicked()), canvas, SLOT(swapRG()));
 
     connect(selectionReseter, SIGNAL(clicked()), canvas, SLOT(resetDisplay()));
     connect(modifySaver, SIGNAL(clicked()), canvas, SLOT(saveModify()));

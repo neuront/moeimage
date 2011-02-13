@@ -37,7 +37,7 @@ namespace ui {
         void paintEvent(QPaintEvent*);
 
         template <typename _PixelMaker>
-        void SwapColor(_PixelMaker pm);
+        void swapColor(_PixelMaker pm);
 
         void selectPoint(QPoint point);
         void resetFlags(QSize size);
@@ -50,9 +50,9 @@ namespace ui {
     signals:
         void Painted();
     public slots:
-        void SwapRB();
-        void SwapGB();
-        void SwapRG();
+        void swapRB();
+        void swapGB();
+        void swapRG();
         void resetDisplay();
         void saveModify();
     };
