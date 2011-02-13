@@ -56,7 +56,9 @@ MainWindow::MainWindow()
 
     connect(toleranceEditor, SIGNAL(textChanged(QString const&)), this, SLOT(toleranceChange(QString const&)));
 
-    connect(canvas, SIGNAL(Painted()), this, SLOT(repaint()));
+    connect(canvas, SIGNAL(painted()), this, SLOT(refreshUi()));
+
+    setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
 }
 
 void MainWindow::tryOpenImage()
@@ -79,8 +81,13 @@ void MainWindow::toleranceChange(QString const& tolerance)
 {
     bool ok;
     int newValue = tolerance.toInt(&ok);
-    if (ok)
+    if (ok && newValue >= 0)
     {
         canvas->setColorTolerance(newValue);
     }
+}
+
+void MainWindow::refreshUi()
+{
+    repaint();
 }

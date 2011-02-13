@@ -140,7 +140,7 @@ namespace ui {
 
         explicit MainLayoutWrapper(QWidget* w)
             : widget(w)
-            , layout(new QVBoxLayout)
+            , layout(new QVBoxLayout(w))
         {
             widget->setLayout(layout);
         }

@@ -48,7 +48,7 @@ namespace ui {
 
         void mousePressEvent(QMouseEvent* event);
     signals:
-        void Painted();
+        void painted();
     public slots:
         void swapRB();
         void swapGB();

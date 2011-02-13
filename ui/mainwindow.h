@@ -40,6 +40,8 @@ namespace ui {
         void tryOpenImage();
         void trySaveImage();
 
+        void refreshUi();
+
         void toleranceChange(QString const& tolerance);
     };
 

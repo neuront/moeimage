@@ -34,7 +34,7 @@ void Canvas::setImage(QString fileName)
     coreImage = QImage(fileName);
     displayImage = coreImage.copy(0, 0, coreImage.width(), coreImage.height());
     resetFlags(coreImage.size());
-    emit Painted();
+    emit painted();
 }
 
 void Canvas::saveImage(QString fileName) const
@@ -51,7 +51,7 @@ void Canvas::resetDisplay()
     }
     selected = false;
     selectedPoints.clear();
-    emit Painted();
+    emit painted();
 }
 
 void Canvas::saveModify()
@@ -104,7 +104,7 @@ void Canvas::refreshDisplayImage()
             }
         }
     }
-    emit Painted();
+    emit painted();
 }
 
 void Canvas::findFrom()
@@ -194,17 +194,17 @@ struct RGSwp
 void Canvas::swapRB()
 {
     swapColor(RBSwp());
-    emit Painted();
+    emit painted();
 }
 
 void Canvas::swapGB()
 {
     swapColor(GBSwp());
-    emit Painted();
+    emit painted();
 }
 
 void Canvas::swapRG()
 {
     swapColor(RGSwp());
-    emit Painted();
+    emit painted();
 }
