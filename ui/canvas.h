@@ -6,6 +6,7 @@
 #include <QPoint>
 #include <QPaintEvent>
 #include <QMouseEvent>
+#include <data/imagebase.h>
 
 namespace ui {
 
@@ -24,8 +25,8 @@ namespace ui {
 
         void setColorTolerance(int t);
     protected:
-        QImage coreImage;
-        QImage displayImage;
+        data::ImageBase coreImage;
+        data::ImageBase displayImage;
 
         bool* selectedPointFlags;
         QList<QPoint> selectedPoints;

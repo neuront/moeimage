@@ -1,5 +1,7 @@
 TEMPLATE = app
 CONFIG *= qt
 
-SOURCES *= main.cpp ui/*.cpp
-HEADERS *= ui/*.h
+SOURCES *= ui/*.cpp data/*.cpp main.cpp
+HEADERS *= ui/*.h data/*.h
+
+INCLUDEPATH *= .

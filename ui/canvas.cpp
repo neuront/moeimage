@@ -1,5 +1,6 @@
 #include <QPainter>
 #include <algorithm>
+#include <data/matrix3.h>
 #include "canvas.h"
 
 using namespace ui;
@@ -158,53 +159,20 @@ void Canvas::mousePressEvent(QMouseEvent* event)
     selectPoint(QPoint(event->x(), event->y()));
 }
 
-template <typename _PixelMaker>
-void Canvas::swapColor(_PixelMaker pm)
-{
-    for (int i = 0; i < selectedPoints.size(); ++i)
-    {
-        displayImage.setPixel(selectedPoints[i], pm(displayImage.pixel(selectedPoints[i])));
-    }
-}
-
-struct RBSwp
-{
-    QRgb operator()(QRgb const& rgb) const
-    {
-        return QColor::fromRgb(qBlue(rgb), qGreen(rgb), qRed(rgb)).rgb();
-    }
-};
-
-struct GBSwp
-{
-    QRgb operator()(QRgb const& rgb) const
-    {
-        return QColor::fromRgb(qRed(rgb), qBlue(rgb), qGreen(rgb)).rgb();
-    }
-};
-
-struct RGSwp
-{
-    QRgb operator()(QRgb const& rgb) const
-    {
-        return QColor::fromRgb(qGreen(rgb), qRed(rgb), qBlue(rgb)).rgb();
-    }
-};
-
 void Canvas::swapRB()
 {
-    swapColor(RBSwp());
+    displayImage.apply(selectedPoints, data::rbSwapMatrix());
     emit painted();
 }
 
 void Canvas::swapGB()
 {
-    swapColor(GBSwp());
+    displayImage.apply(selectedPoints, data::gbSwapMatrix());
     emit painted();
 }
 
 void Canvas::swapRG()
 {
-    swapColor(RGSwp());
+    displayImage.apply(selectedPoints, data::rgSwapMatrix());
     emit painted();
 }
