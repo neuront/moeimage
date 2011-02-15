@@ -1,5 +1,5 @@
-#ifndef __MOEIMAGE_DATA_CORE_IMAGE_H__
-#define __MOEIMAGE_DATA_CORE_IMAGE_H__
+#ifndef __MOEIMAGE_DATA_IMAGE_BASE_H__
+#define __MOEIMAGE_DATA_IMAGE_BASE_H__
 
 #include <QImage>
 #include <QList>
@@ -18,4 +18,4 @@ namespace data {
 
 }
 
-#endif /* __MOEIMAGE_DATA_CORE_IMAGE_H__ */
+#endif /* __MOEIMAGE_DATA_IMAGE_BASE_H__ */

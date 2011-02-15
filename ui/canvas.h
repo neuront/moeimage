@@ -7,6 +7,7 @@
 #include <QPaintEvent>
 #include <QMouseEvent>
 #include <data/imagebase.h>
+#include <data/coreimage.h>
 
 namespace ui {
 
@@ -16,7 +17,6 @@ namespace ui {
         Q_OBJECT
     public:
         explicit Canvas(QWidget* parent);
-        ~Canvas();
 
         QSize sizeHint() const;
 
@@ -25,29 +25,16 @@ namespace ui {
 
         void setColorTolerance(int t);
     protected:
-        data::ImageBase coreImage;
+        data::CoreImage coreImage;
         data::ImageBase displayImage;
 
-        bool* selectedPointFlags;
-        QList<QPoint> selectedPoints;
-
         int tolerance;
-        QPoint lastSelectPoint;
         bool selected;
-
-        void paintEvent(QPaintEvent*);
 
         template <typename _PixelMaker>
         void swapColor(_PixelMaker pm);
 
         void selectPoint(QPoint point);
-        void resetFlags(QSize size);
-        void refreshDisplayImage();
-        bool maskAsSelected(QPoint p, QPoint reference) const;
-        void findFrom();
-        int pointToIndex(QPoint p);
-
-        void mousePressEvent(QMouseEvent* event);
     signals:
         void painted();
     public slots:
@@ -56,6 +43,9 @@ namespace ui {
         void swapRG();
         void resetDisplay();
         void saveModify();
+    protected:
+        void paintEvent(QPaintEvent*);
+        void mousePressEvent(QMouseEvent* event);
     };
 
 }

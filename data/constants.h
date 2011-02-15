@@ -3,7 +3,7 @@
 
 namespace data {
 
-    static int const RGB_MODULUS = 65536;
+    int const RGB_MODULUS = 65536;
 
 }
 
