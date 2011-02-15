@@ -68,10 +68,7 @@ void CoreImage::resetFlags()
     delete selectionFlags;
     int size = width() * height() + 1;
     selectionFlags = new bool[size];
-    for (int i = 0; i < size; ++i)
-    {
-        selectionFlags[i] = false;
-    }
+    clearSelection();
 }
 
 bool CoreImage::maskAsSelected(QPoint p, QPoint reference, int tolerance) const

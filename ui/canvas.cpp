@@ -1,6 +1,5 @@
 #include <QPainter>
 #include <algorithm>
-#include <data/matrix3.h>
 #include "canvas.h"
 
 using namespace ui;
@@ -8,7 +7,6 @@ using namespace ui;
 Canvas::Canvas(QWidget* parent)
     : QWidget(parent)
     , tolerance(256)
-    , selected(false)
 {}
 
 void Canvas::paintEvent(QPaintEvent*)
@@ -25,7 +23,7 @@ QSize Canvas::sizeHint() const
 void Canvas::setImage(QString fileName)
 {
     coreImage = QImage(fileName);
-    displayImage = coreImage.copy(0, 0, coreImage.width(), coreImage.height());
+    displayImage = coreImage;
     emit painted();
 }
 
@@ -36,9 +34,8 @@ void Canvas::saveImage(QString fileName) const
 
 void Canvas::resetDisplay()
 {
-    displayImage = coreImage.copy(0, 0, coreImage.width(), coreImage.height());
+    displayImage = coreImage;
     coreImage.clearSelection();
-    selected = false;
     emit painted();
 }
 
@@ -84,21 +81,18 @@ void Canvas::mousePressEvent(QMouseEvent* event)
 
 void Canvas::swapRB()
 {
-    QList<QPoint> const& selectedPoints = coreImage.getSelectedPoints();
-    displayImage.apply(selectedPoints, data::rbSwapMatrix());
+    displayImage.swapRB(coreImage.getSelectedPoints());
     emit painted();
 }
 
 void Canvas::swapGB()
 {
-    QList<QPoint> const& selectedPoints = coreImage.getSelectedPoints();
-    displayImage.apply(selectedPoints, data::gbSwapMatrix());
+    displayImage.swapGB(coreImage.getSelectedPoints());
     emit painted();
 }
 
 void Canvas::swapRG()
 {
-    QList<QPoint> const& selectedPoints = coreImage.getSelectedPoints();
-    displayImage.apply(selectedPoints, data::rgSwapMatrix());
+    displayImage.swapRG(coreImage.getSelectedPoints());
     emit painted();
 }

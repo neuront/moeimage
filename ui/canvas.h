@@ -6,8 +6,8 @@
 #include <QPoint>
 #include <QPaintEvent>
 #include <QMouseEvent>
-#include <data/imagebase.h>
 #include <data/coreimage.h>
+#include <data/displayimage.h>
 
 namespace ui {
 
@@ -26,13 +26,9 @@ namespace ui {
         void setColorTolerance(int t);
     protected:
         data::CoreImage coreImage;
-        data::ImageBase displayImage;
+        data::DisplayImage displayImage;
 
         int tolerance;
-        bool selected;
-
-        template <typename _PixelMaker>
-        void swapColor(_PixelMaker pm);
 
         void selectPoint(QPoint point);
     signals:
