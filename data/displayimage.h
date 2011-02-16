@@ -13,6 +13,8 @@ namespace data {
         void swapRB(QList<QPoint> const& applyPoints);
         void swapGB(QList<QPoint> const& applyPoints);
         void swapRG(QList<QPoint> const& applyPoints);
+    public:
+        void darkerAs(QImage const& baseImage, QList<QPoint> const& noDarkenPoints);
     };
 
 }

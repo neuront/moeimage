@@ -63,6 +63,14 @@ void CoreImage::clearSelection()
     selectedPoints.clear();
 }
 
+void CoreImage::saveImageOnSelected(QImage const& baseImage)
+{
+    for (int i = 0; i < selectedPoints.size(); ++i)
+    {
+        setPixel(selectedPoints[i], baseImage.pixel(selectedPoints[i]));
+    }
+}
+
 void CoreImage::resetFlags()
 {
     delete selectionFlags;

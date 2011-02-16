@@ -21,6 +21,8 @@ namespace data {
         QList<QPoint> const& getSelectedPoints() const;
 
         void clearSelection();
+
+        void saveImageOnSelected(QImage const& baseImage);
     private:
         bool* selectionFlags;
         QList<QPoint> selectedPoints;
