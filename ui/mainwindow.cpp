@@ -65,7 +65,7 @@ MainWindow::MainWindow()
 
 void MainWindow::tryOpenImage()
 {
-    if (imageOpener->openFile(this))
+    if (imageOpener->selectFile(this))
     {
         canvas->setImage(imageOpener->getFileName());
     }
@@ -73,7 +73,7 @@ void MainWindow::tryOpenImage()
 
 void MainWindow::trySaveImage()
 {
-    if (imageSaver->saveFile(this, imageOpener->getFileName()))
+    if (imageSaver->selectFile(this, imageOpener->getFileName()))
     {
         canvas->saveImage(imageSaver->getFileName());
     }

@@ -41,11 +41,7 @@ void Canvas::resetDisplay()
 
 void Canvas::saveModify()
 {
-    QList<QPoint> const& selectedPoints = coreImage.getSelectedPoints();
-    for (int i = 0; i < selectedPoints.size(); ++i)
-    {
-        coreImage.setPixel(selectedPoints[i], displayImage.pixel(selectedPoints[i]));
-    }
+    coreImage.saveImageOnSelected(displayImage);
     resetDisplay();
 }
 
@@ -56,21 +52,8 @@ void Canvas::setColorTolerance(int t)
 
 void Canvas::selectPoint(QPoint point)
 {
-    for (int y = 0; y < coreImage.height(); ++y)
-    {
-        for (int x = 0; x < coreImage.width(); ++x)
-        {
-            displayImage.setPixel(QPoint(x, y), QColor(coreImage.pixel(QPoint(x, y))).darker().rgb());
-        }
-    }
-
     coreImage.fromPoint(point, tolerance);
-    QList<QPoint> const& selectedPoints = coreImage.getSelectedPoints();
-    for (int i = 0; i < selectedPoints.size(); ++i)
-    {
-        displayImage.setPixel(selectedPoints[i], QColor(coreImage.pixel(selectedPoints[i])).rgb());
-    }
-
+    displayImage.darkerAs(coreImage, coreImage.getSelectedPoints());
     emit painted();
 }
 

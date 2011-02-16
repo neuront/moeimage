@@ -8,7 +8,7 @@ ImageSaveTrigger::ImageSaveTrigger(QObject* parent)
     : QObject(parent)
 {}
 
-bool ImageSaveTrigger::saveFile(QWidget* parent, QString defaultName)
+bool ImageSaveTrigger::selectFile(QWidget* parent, QString defaultName)
 {
     fileName = QFileDialog::getSaveFileName(parent, tr("Select File to Save"), defaultName);
     return !fileName.isNull();

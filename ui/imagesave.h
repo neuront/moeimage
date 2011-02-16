@@ -14,7 +14,7 @@ namespace ui {
     public:
         explicit ImageSaveTrigger(QObject* parent);
 
-        bool saveFile(QWidget* parent, QString defaultName);
+        bool selectFile(QWidget* parent, QString defaultName);
         QString getFileName() const;
     private:
         QString fileName;

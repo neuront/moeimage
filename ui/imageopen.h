@@ -13,7 +13,7 @@ namespace ui {
     public:
         explicit ImageOpenTrigger(QObject* parent);
 
-        bool openFile(QWidget* parent);
+        bool selectFile(QWidget* parent);
         QString getFileName() const;
     private:
         QString fileName;
